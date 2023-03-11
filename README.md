@@ -10,7 +10,7 @@
 <h4>6. Authentication</h4>
 <h3>Main Page</h3>
 </b>
-![MainPage](https://user-images.githubusercontent.com/66749177/224455341-3cafd362-9b39-47fb-89de-bdf2226731b9.png)
+
 <h3>Cart Page</h3>
 </b>
-![CartPage](https://user-images.githubusercontent.com/66749177/224455375-f877e6eb-dfd5-4c4c-8564-b77480336f13.png)
+
