@@ -10,7 +10,7 @@
 <h4>6. Authentication</h4>
 <h3>Main Page</h3>
 </b>
-![MainPage](https://user-images.githubusercontent.com/66749177/224455578-d576b25a-090d-4139-ba33-0b78efceeacc.png)
+<img src="https://github.com/Mr-AliMattar/BakeryShop-Razor/blob/master/BakeryShop-Razor/wwwroot/Images/MainPage.png" alt="Alt text" title="Optional title">
 <h3>Cart Page</h3>
 </b>
-![CartPage](https://user-images.githubusercontent.com/66749177/224455375-f877e6eb-dfd5-4c4c-8564-b77480336f13.png)
+<img src="https://github.com/Mr-AliMattar/BakeryShop-Razor/blob/master/BakeryShop-Razor/wwwroot/Images/CartPage.png" alt="Alt text" title="Optional title">
