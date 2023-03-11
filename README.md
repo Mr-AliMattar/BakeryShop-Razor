@@ -13,4 +13,4 @@
 ![MainPage](https://user-images.githubusercontent.com/66749177/224455578-d576b25a-090d-4139-ba33-0b78efceeacc.png)
 <h3>Cart Page</h3>
 </b>
-
+![CartPage](https://user-images.githubusercontent.com/66749177/224455375-f877e6eb-dfd5-4c4c-8564-b77480336f13.png)
