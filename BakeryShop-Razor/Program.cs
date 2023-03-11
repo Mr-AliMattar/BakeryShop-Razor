@@ -1,7 +1,22 @@
+using BakeryShop_Razor.Data;
+using BakeryShop_Razor.Model;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<BakeryDbContext>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>()
+    .AddEntityFrameworkStores<BakeryDbContext>();
+builder.Services.Configure<IdentityOptions>(option =>
+{
+    option.Password.RequiredLength = 5;
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireUppercase = false;
+});
 
 var app = builder.Build();
 
@@ -13,6 +28,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

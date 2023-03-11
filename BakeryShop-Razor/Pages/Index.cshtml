@@ -3,8 +3,85 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@inject SignInManager<IdentityUser> singInManager;
+<div id ="FeaturedProduct" class="container">
+    <div class="row">
+        <div>
+            <h1>Featured Product</h1>
+        </div>
+        <div class="col-sm-5">
+            <img src="/Images/@Model.FeaturedProduct.ImageName" height="300" width="500" />
+        </div>
+        <div class="col-sm-7">
+                <h3 class="text-uppercase">@Model.FeaturedProduct.Name</h3>
+                <div style="height : 220px">
+                    <p>@Model.FeaturedProduct.Description</p>
+                </div>
+                <div class="row">
+                <div class="mt-5 row">
+                    <p class="col-8">Price: @Model.FeaturedProduct.Price</p>
+                    @if (singInManager.IsSignedIn(User))
+                    {
+                        <a onclick="AddToCart(@Model.FeaturedProduct.Id);" class="btn btn-primary col-4">Buy</a>
+                    } else
+                    {
+                        <a onclick="AddToCart(0);" class="btn btn-primary col-4">Buy</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="text-danger">
+    <h4 id="Warrning"></h4>
+</div>
+<div class="text-success">
+    <h4 id="Success"></h4>
+</div>
+<div id="Shop">
+    <div class="row gap-md-4">
+        <div>
+            <h1>Shop</h1>
+        </div>
+        @foreach (var pro in Model.products)
+        {
+            <div class="row col-lg-4">
+                <div class="col-md-6">
+                    <img src="~/Images/@pro.ImageName" width="200" height="150">
+                </div>
+                <div class="col-sm-6 col"> 
+                    <h3 class="text-uppercase">@pro.Name</h3>
+                    <p>@pro.Description</p>
+                    <div class="mt-5 row">
+                        <p class ="col-8">@pro.Price</p>
+                        @if (singInManager.IsSignedIn(User))
+                        {
+                            <a onclick="AddToCart(@pro.Id);" class="btn btn-primary col-4">Buy</a>
+                        }
+                        else
+                        {
+                            <a onclick="AddToCart(0);" class="btn btn-primary col-4">Buy</a>
+                        }
+                    </div>
+                </div>
+             </div>
+        }
+    </div>
+</div>
+<p id="myOrder"></p>
+    <script type="text/javascript">
+        let order = "";
+        function AddToCart (i) {
+        if (i > 0) {
+            order = order + i.toString();
+            $("#myOrder").text(order);
+            $("#Success").text("This Item Sent To Cart Successfully");
+        } else {
+            $("#Warrning").text("Please Login Or Create a New Account");      
+        }
+        }
+        function ChangeCart() {
+        document.getElementById("CartButton").href = "/MyCart?id=" + order + "?@User.Identity.Name";
+        }
+    </script>
+

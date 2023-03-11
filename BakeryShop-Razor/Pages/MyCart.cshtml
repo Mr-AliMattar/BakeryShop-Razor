@@ -1,0 +1,72 @@
+﻿@page
+@model BakeryShop_Razor.Pages.MyCartModel
+@{
+    <h1>Your Cart</h1>
+    if (Model.products.Count <= 0)
+    {
+        <h2>Empty</h2>
+    } else {
+        @foreach(var pro in Model.products)
+    {
+            string newId = ((pro.Id + (int)pro.Price)*10).ToString();
+
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="~/Images/@pro.ImageName" width="200" height="150">
+                </div>
+                <div class="col-md-10 col">
+                    <h3 class="text-uppercase">@pro.Name</h3>
+                    <p>@pro.Description</p>
+                        <div class="row-cols-10">
+                            <label></label>
+                        <input onchange="ChangeValue(@pro.Id,@pro.Price,@newId);" id="@newId" asp-for="OrderQuantity" style="width: 50px" />
+                        x
+                            <span id="Price">@pro.Price</span>
+                        =
+                        <span id="@pro.Id">0</span>
+                        </div>
+                </div>
+                <span asp-validation-for="OrderQuantity" class="text-danger"></span>
+            </div>
+     }
+        <div style="text-align:center">
+            <div class="row">
+                <h5>Total price is: </h5>
+                <h5 id="Total">0</h5>
+            </div>
+        <button style="width:300px" class="btn btn-danger">Confirm</button>
+        </div>
+    }
+}
+<script type="text/javascript">
+    let ids = [];
+    var tp = 0;
+    function ChangeValue(t,p,q) {
+        var quantity = $("#" + q).val();
+
+        if (quantity < 1 || !quantity) {
+            $("#" + q).val(1);
+            quantity = 1;
+        } else{
+        parseFloat(p).toFixed();
+        parseFloat(quantity).toFixed();
+        }
+
+        $("#"+t).text(p * quantity);
+        TotalPrice(t);
+    }
+    function TotalPrice(t) {
+        if (!ids.includes(t)){
+            ids.push(t);
+        }
+        let x = [];
+
+        for (let i = 0; i < ids.length; i++) {  
+           x.push(parseFloat($("#" + ids[i]).text()));
+        }
+        var total = x.reduce((a,b) => a+b)
+        $("#Total").text(total);
+    }
+</script>
+
+
